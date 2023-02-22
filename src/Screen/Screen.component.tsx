@@ -11,7 +11,7 @@ export function Screen(props: IScreenProps) {
   return (
     <Styled.Root {...props}>
       <Header />
-      <Container>
+      <Container css={{ marginTop: -27 }} maxWidth={736}>
         <Toolbar />
       </Container>
     </Styled.Root>

@@ -1,4 +1,5 @@
 import { createStitches } from '@stitches/react'
+import type * as Stitches from '@stitches/react'
 
 export const {
   styled,
@@ -46,6 +47,12 @@ export const {
     xl: '(min-width: 1200px)',
     xxl: '(min-width: 1440px)',
     xxxl: '(min-width: 1920px)',
+    bp1: '(min-width: 320px)',
+    bp2: '(min-width: 426px)',
+    bp3: '(min-width: 768px)',
+    bp4: '(min-width: 1440px)',
   },
   utils: {},
 })
+
+export type CSS = Stitches.CSS<typeof config>

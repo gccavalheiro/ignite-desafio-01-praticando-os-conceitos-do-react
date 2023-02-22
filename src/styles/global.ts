@@ -14,7 +14,6 @@ export const globalStyles = globalCss({
   body: {
     backgroundColor: '$gray600',
     color: '$gray100',
-    fontFamily: '$inter',
     fontWeight: '$regular',
     fontSize: 16,
     minHeight: '100%',
@@ -27,6 +26,10 @@ export const globalStyles = globalCss({
   'h1, h2, h3, h4, h5, h6, p': {
     marginBlockStart: 0,
     marginBlockEnd: 0,
+  },
+
+  'body, h1, h2, h3, h4, h5, h6, p, span, input': {
+    fontFamily: '$inter',
   },
 
   button: {
