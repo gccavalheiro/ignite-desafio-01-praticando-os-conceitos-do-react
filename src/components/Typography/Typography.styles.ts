@@ -4,13 +4,40 @@ const Root = styled('p', {
   variants: {
     fontSize: {
       12: {
-        fontSize: '0.75rem',
+        fontSize: '$12',
       },
       14: {
-        fontSize: '0.875rem',
+        fontSize: '$14',
       },
       16: {
-        fontSize: '1rem',
+        fontSize: '$16',
+      },
+      18: {
+        fontSize: '$18',
+      },
+      20: {
+        fontSize: '$20',
+      },
+      24: {
+        fontSize: '$24',
+      },
+      28: {
+        fontSize: '$28',
+      },
+      32: {
+        fontSize: '$32',
+      },
+      36: {
+        fontSize: '$36',
+      },
+      40: {
+        fontSize: '$40',
+      },
+      44: {
+        fontSize: '$44',
+      },
+      48: {
+        fontSize: '$48',
       },
     },
     fontWeight: {
@@ -25,7 +52,6 @@ const Root = styled('p', {
 
   defaultVariants: {
     fontSize: 16,
-    fontWeight: 'regular',
   },
 })
 

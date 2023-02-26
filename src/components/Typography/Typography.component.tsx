@@ -8,8 +8,8 @@ type ITypographyBaseProps = ComponentProps<typeof Styled.Root>
 
 interface ITypographyProps extends ITypographyBaseProps {
   children: React.ReactNode
-  as: keyof JSX.IntrinsicElements
-  color: string
+  as?: keyof JSX.IntrinsicElements
+  color?: string
 }
 
 export function Typography(props: ITypographyProps) {
