@@ -1,20 +1,25 @@
 import { Check, Trash } from 'phosphor-react'
+import React from 'react'
 
-import { Button } from '../../../Button'
-import { Typography } from '../../../Typography'
 import Styled from './TodoItem.styles'
 
-interface ITodoItemProps {
+interface ITodoItemProps extends React.HTMLAttributes<HTMLDivElement> {
   id: string
   description: string
+  checked: boolean
+  onCheckedChange?: () => void
 }
 
 export function TodoItem(props: ITodoItemProps) {
-  const { id, description, ...rest } = props
+  const { id, description, checked, onCheckedChange, ...rest } = props
 
   return (
     <Styled.Root {...rest}>
-      <Styled.Checkbox id={id}>
+      <Styled.Checkbox
+        id={id}
+        checked={checked}
+        onCheckedChange={onCheckedChange}
+      >
         <Styled.CheckboxIndicator>
           <Check />
         </Styled.CheckboxIndicator>

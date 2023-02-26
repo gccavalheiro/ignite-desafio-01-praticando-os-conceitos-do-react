@@ -1,6 +1,6 @@
 import Styled from './TextField.styles'
 
-interface ITextFieldProps {
+interface ITextFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
   placeholder: string
 }
 

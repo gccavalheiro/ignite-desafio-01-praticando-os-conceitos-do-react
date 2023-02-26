@@ -1,23 +1,28 @@
+import React from 'react'
+import { ITaskProps } from '../../Screen'
 import { TodoHeader, TodoItem } from './components'
 import Styled from './Todo.styles'
 
-export function Todo() {
+interface ITodoProps {
+  tasks: ITaskProps[]
+}
+
+export function Todo(props: ITodoProps) {
+  const { tasks, ...rest } = props
+  const [checked, setChecked] = React.useState('indeterminate')
+
   return (
-    <Styled.Root>
-      <TodoHeader />
+    <Styled.Root {...rest}>
+      <TodoHeader tasks={tasks} />
       <Styled.Content>
-        <TodoItem
-          id="checkbox-item-1"
-          description="Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer."
-        />
-        <TodoItem
-          id="checkbox-item-2"
-          description="Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer."
-        />
-        <TodoItem
-          id="checkbox-item-3"
-          description="Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer."
-        />
+        {tasks.map((task, index) => (
+          <TodoItem
+            key={index}
+            id={`checkbox-item-${index}`}
+            description={task.description}
+            checked={task.checked}
+          />
+        ))}
       </Styled.Content>
     </Styled.Root>
   )

@@ -3,16 +3,41 @@ import * as RadixCheckbox from '@radix-ui/react-checkbox'
 import { styled } from '../../../../styles'
 import { Button as ButtonComponent } from '../../../Button'
 
+const Button = styled(ButtonComponent, {
+  minWidth: 32,
+  width: 'fit-content',
+  minHeight: 32,
+  height: 'fit-content',
+  fontSize: '$20',
+  lineHeight: 0,
+  padding: 0,
+  transition: 'all 300ms ease-in-out',
+
+  '&:hover, &:focus': {
+    backgroundColor: '$gray400',
+    color: '$danger',
+    outline: 'none',
+  },
+})
+
 const Root = styled('div', {
   display: 'flex',
   gap: 16,
   backgroundColor: '$gray500',
   padding: '1rem',
   borderRadius: 8,
-  transition: 'filter 300ms ease-in-out',
+  transition: 'all 300ms ease-in-out',
+
+  [`.${Button.className}`]: {
+    opacity: 0,
+  },
 
   '&:hover': {
     filter: 'brightness(.9)',
+
+    [`.${Button.className}`]: {
+      opacity: 1,
+    },
   },
 })
 
@@ -62,22 +87,7 @@ const CheckboxLabel = styled('label', {
   color: '$gray100',
   transition: 'color 300ms ease-in-out',
   cursor: 'pointer',
-})
-
-const Button = styled(ButtonComponent, {
-  minWidth: 32,
-  width: 'fit-content',
-  minHeight: 32,
-  height: 'fit-content',
-  fontSize: '$20',
-  lineHeight: 0,
-  padding: 0,
-
-  '&:hover, &:focus': {
-    backgroundColor: '$gray400',
-    color: '$danger',
-    outline: 'none',
-  },
+  width: '100%',
 })
 
 export default {

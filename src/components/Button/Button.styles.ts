@@ -20,6 +20,16 @@ const Button = styled('button', {
     backgroundColor: '$blue',
   },
 
+  '&:disabled': {
+    backgroundColor: '$gray500',
+    filter: 'brightness(.9)',
+    color: '$gray300',
+
+    '&:disabled, &:disabled svg ': {
+      cursor: 'not-allowed',
+    },
+  },
+
   variants: {
     background: {
       transparent: {
