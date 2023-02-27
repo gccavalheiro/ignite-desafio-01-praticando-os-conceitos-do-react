@@ -9,7 +9,19 @@ const Content = styled('div', {
   marginTop: '1.5rem',
 })
 
+const WhitoutTasks = styled('div', {
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
+  width: '100%',
+  gap: 16,
+  marginTop: 80,
+  textAlign: 'center',
+})
+
 export default {
   Root,
   Content,
+  WhitoutTasks,
 }

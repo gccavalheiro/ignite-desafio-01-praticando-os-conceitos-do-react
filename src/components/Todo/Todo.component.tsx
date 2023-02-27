@@ -1,6 +1,8 @@
-import { v4 as uuid } from 'uuid'
+import { Notepad } from 'phosphor-react'
 
 import { ITaskProps } from '../../Screen'
+import { Icon } from '../Icon'
+import { Typography } from '../Typography'
 import { TodoHeader, TodoItem } from './components'
 import Styled from './Todo.styles'
 
@@ -17,11 +19,26 @@ export function Todo(props: ITodoProps) {
     <Styled.Root {...rest}>
       <TodoHeader tasks={tasks} />
       <Styled.Content>
+        {!tasks.length && (
+          <Styled.WhitoutTasks>
+            <Icon css={{ color: '$gray300', fontSize: '$48' }}>
+              <Notepad />
+            </Icon>
+            <div>
+              <Typography fontWeight="bold" color="$gray300">
+                Você ainda não tem tarefas cadastradas
+              </Typography>
+              <Typography color="$gray300">
+                Crie tarefas e organize seus itens a fazer
+              </Typography>
+            </div>
+          </Styled.WhitoutTasks>
+        )}
         {tasks
           .map((task) => (
             <TodoItem
-              key={uuid()}
-              id={`checkbox-item-${uuid()}`}
+              key={task.id}
+              id={`checkbox-item-${task.id}`}
               description={task.description}
               checked={task.checked}
               onTrash={() => deleteTask(task.id)}

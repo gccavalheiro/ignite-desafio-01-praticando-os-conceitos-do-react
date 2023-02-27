@@ -39,7 +39,7 @@ const taskMock: ITaskProps[] = [
 ]
 
 export function Screen(props: IScreenProps) {
-  const [tasks, setTasks] = React.useState<ITaskProps[]>(taskMock)
+  const [tasks, setTasks] = React.useState<ITaskProps[]>([])
   const [newTask, setNewTask] = React.useState<string>('')
 
   function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {

@@ -1,8 +1,11 @@
 import React from 'react'
 
+import { ComponentProps } from '@stitches/react'
+
 import Styled from './Icon.styles'
 
-interface IIconProps {
+type IIconBaseProps = ComponentProps<typeof Styled.Root>
+interface IIconProps extends IIconBaseProps {
   children: React.ReactNode
 }
 
