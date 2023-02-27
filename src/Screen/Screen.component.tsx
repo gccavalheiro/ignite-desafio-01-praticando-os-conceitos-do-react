@@ -1,5 +1,6 @@
 import { Plus } from 'phosphor-react'
 import React from 'react'
+import { v4 as uuid } from 'uuid'
 
 import {
   Button,
@@ -17,63 +18,33 @@ interface IScreenProps extends React.HTMLAttributes<HTMLDivElement> {}
 const maxWidth = 736
 
 export interface ITaskProps {
+  id: string
   description: string
   checked: boolean
 }
 
 const taskMock: ITaskProps[] = [
   {
-    description:
-      'Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.',
-    checked: true,
-  },
-  {
-    description:
-      'Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.',
-    checked: true,
-  },
-  {
-    description:
-      'Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.',
-    checked: true,
-  },
-  {
+    id: uuid(),
     description:
       'Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.',
     checked: false,
   },
   {
+    id: uuid(),
     description:
       'Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.',
     checked: false,
-  },
-  {
-    description:
-      'Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.',
-    checked: false,
-  },
-  {
-    description:
-      'Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.',
-    checked: true,
-  },
-  {
-    description:
-      'Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.',
-    checked: true,
   },
 ]
 
 export function Screen(props: IScreenProps) {
   const [tasks, setTasks] = React.useState<ITaskProps[]>(taskMock)
-  const [newTask, setNewTask] = React.useState<ITaskProps>({
-    description: '',
-    checked: false,
-  })
+  const [newTask, setNewTask] = React.useState<string>('')
 
   function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
     event.target.setCustomValidity('')
-    setNewTask({ ...newTask, description: event.target.value })
+    setNewTask(event.target.value)
   }
 
   function handleInputInvalid(event: React.ChangeEvent<HTMLInputElement>) {
@@ -83,8 +54,28 @@ export function Screen(props: IScreenProps) {
   function handleCreateTask(event: React.FormEvent) {
     event.preventDefault()
 
-    setTasks([...tasks, newTask])
-    setNewTask({ description: '', checked: false })
+    setTasks([...tasks, { id: uuid(), description: newTask, checked: false }])
+    setNewTask('')
+  }
+
+  function deleteTask(id: ITaskProps['id']) {
+    const taskDeletedOne = tasks.filter((task) => {
+      return task.id !== id
+    })
+
+    setTasks(taskDeletedOne)
+  }
+
+  function updateChecked(id: ITaskProps['id'], checked: ITaskProps['checked']) {
+    const newTasks = tasks.slice()
+    const taskIndex = newTasks.findIndex((task) => task.id === id)
+
+    if (taskIndex < 0) {
+      return
+    }
+
+    newTasks[taskIndex].checked = checked
+    setTasks(newTasks)
   }
 
   return (
@@ -94,7 +85,7 @@ export function Screen(props: IScreenProps) {
         <Toolbar onSubmit={handleCreateTask}>
           <TextField
             placeholder="Adicione uma nova tarefa"
-            value={newTask.description}
+            value={newTask}
             onChange={handleInputChange}
             onInvalid={handleInputInvalid}
             required
@@ -107,7 +98,11 @@ export function Screen(props: IScreenProps) {
         </Toolbar>
       </Container>
       <Container css={{ marginTop: 64 }} maxWidth={maxWidth}>
-        <Todo tasks={tasks} />
+        <Todo
+          tasks={tasks}
+          updateChecked={updateChecked}
+          deleteTask={deleteTask}
+        />
       </Container>
     </Styled.Root>
   )

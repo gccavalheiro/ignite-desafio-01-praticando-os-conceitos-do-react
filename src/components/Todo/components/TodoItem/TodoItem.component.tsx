@@ -7,14 +7,21 @@ interface ITodoItemProps extends React.HTMLAttributes<HTMLDivElement> {
   id: string
   description: string
   checked: boolean
-  onCheckedChange?: () => void
+  onTrash: () => void
+  onCheckedChange: (value: boolean | 'indeterminate') => void
 }
 
 export function TodoItem(props: ITodoItemProps) {
-  const { id, description, checked, onCheckedChange, ...rest } = props
+  const { id, description, checked, onTrash, onCheckedChange, ...rest } = props
+
+  function handleOnClickTrash(event: React.MouseEvent) {
+    event.stopPropagation()
+
+    onTrash()
+  }
 
   return (
-    <Styled.Root {...rest}>
+    <Styled.Root {...rest} onClick={() => onCheckedChange(!checked)}>
       <Styled.Checkbox
         id={id}
         checked={checked}
@@ -24,8 +31,12 @@ export function TodoItem(props: ITodoItemProps) {
           <Check />
         </Styled.CheckboxIndicator>
       </Styled.Checkbox>
-      <Styled.CheckboxLabel htmlFor={id}>{description}</Styled.CheckboxLabel>
-      <Styled.Button icon={<Trash />} background="transparent" />
+      <Styled.CheckboxLabel>{description}</Styled.CheckboxLabel>
+      <Styled.Button
+        icon={<Trash />}
+        background="transparent"
+        onClick={handleOnClickTrash}
+      />
     </Styled.Root>
   )
 }

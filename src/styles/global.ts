@@ -35,4 +35,19 @@ export const globalStyles = globalCss({
   button: {
     border: 'none',
   },
+
+  'body::-webkit-scrollbar': {
+    width: 6,
+  },
+
+  'body::-webkit-scrollbar-track': {
+    boxShadow: 'inset 0 0 8px rgba(0, 0, 0, 0.5)',
+    borderRadius: 8,
+  },
+
+  'body::-webkit-scrollbar-thumb': {
+    backgroundColor: 'darkgrey',
+    outline: '1px solid slategrey',
+    borderRadius: 8,
+  },
 })

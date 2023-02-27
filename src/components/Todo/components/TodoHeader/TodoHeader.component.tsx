@@ -9,9 +9,7 @@ interface ITodoHeaderProps {
 
 export function TodoHeader(props: ITodoHeaderProps) {
   const { tasks } = props
-  const filterCheckedTak = tasks.filter((task) => {
-    return task.checked === true
-  })
+  const filterCheckedTask = tasks.filter((task) => task.checked)
 
   return (
     <Styled.Root>
@@ -27,7 +25,7 @@ export function TodoHeader(props: ITodoHeaderProps) {
           Concluídas
         </Typography>
         <Badge>
-          {filterCheckedTak.length} de {tasks.length}
+          {filterCheckedTask.length} de {tasks.length}
         </Badge>
       </Styled.HeaderBox>
     </Styled.Root>

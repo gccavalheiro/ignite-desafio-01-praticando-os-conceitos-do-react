@@ -22,11 +22,13 @@ const Button = styled(ButtonComponent, {
 
 const Root = styled('div', {
   display: 'flex',
+  alignItems: 'center',
   gap: 16,
   backgroundColor: '$gray500',
   padding: '1rem',
   borderRadius: 8,
   transition: 'all 300ms ease-in-out',
+  cursor: 'pointer',
 
   [`.${Button.className}`]: {
     opacity: 0,
@@ -56,6 +58,7 @@ const Checkbox = styled(RadixCheckbox.Root, {
   border: '2px $blue solid',
   boxSizing: 'border-box',
   transition: 'all 300ms ease-in-out',
+  cursor: 'pointer',
 
   '&[data-state="unchecked"]:hover, &[data-state="unchecked"]:focus': {
     backgroundColor: 'hsl(202deg, 68%, 37%, .2)',
