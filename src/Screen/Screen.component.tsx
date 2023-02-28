@@ -1,4 +1,4 @@
-import { Plus } from 'phosphor-react'
+import { ListPlus, Plus, Trash } from 'phosphor-react'
 import React from 'react'
 import { v4 as uuid } from 'uuid'
 
@@ -6,7 +6,9 @@ import {
   Button,
   Container,
   Header,
+  IToastProps,
   TextField,
+  Toast,
   Todo,
   Toolbar,
   Typography,
@@ -41,6 +43,10 @@ const taskMock: ITaskProps[] = [
 export function Screen(props: IScreenProps) {
   const [tasks, setTasks] = React.useState<ITaskProps[]>(taskMock)
   const [newTask, setNewTask] = React.useState<string>('')
+  const [toastOpen, setToastOpen] = React.useState<IToastProps>({
+    title: '',
+    open: false,
+  })
 
   function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
     event.target.setCustomValidity('')
@@ -56,6 +62,12 @@ export function Screen(props: IScreenProps) {
 
     setTasks([...tasks, { id: uuid(), description: newTask, checked: false }])
     setNewTask('')
+    setToastOpen({
+      icon: <ListPlus />,
+      title: 'Uma nova tarefa foi adicionada.',
+      open: true,
+      variant: 'success',
+    })
   }
 
   function deleteTask(id: ITaskProps['id']) {
@@ -64,6 +76,12 @@ export function Screen(props: IScreenProps) {
     })
 
     setTasks(taskDeletedOne)
+    setToastOpen({
+      icon: <Trash />,
+      title: 'Uma tarefa foi removida.',
+      open: true,
+      variant: 'info',
+    })
   }
 
   function updateChecked(id: ITaskProps['id'], checked: ITaskProps['checked']) {
@@ -77,6 +95,14 @@ export function Screen(props: IScreenProps) {
     newTasks[taskIndex].checked = checked
     setTasks(newTasks)
   }
+
+  React.useEffect(() => {
+    if (toastOpen.open) {
+      setTimeout(() => {
+        setToastOpen({ ...toastOpen, open: false })
+      }, 3000)
+    }
+  }, [toastOpen])
 
   return (
     <Styled.Root {...props}>
@@ -104,6 +130,12 @@ export function Screen(props: IScreenProps) {
           deleteTask={deleteTask}
         />
       </Container>
+      <Toast
+        open={toastOpen.open}
+        title={toastOpen.title}
+        icon={toastOpen.icon}
+        variant={toastOpen.variant}
+      />
     </Styled.Root>
   )
 }
